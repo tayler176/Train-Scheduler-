@@ -1,0 +1,29 @@
+#header{
+    background-color: navy;
+    color: white;
+    padding: 10px 50px 50px 50px;
+    text-align: center;
+}
+
+.container{
+    background-color: lightgray;
+    padding-bottom: 15px;
+    padding-top:10px;
+}
+
+.container2{
+    background-color: gray;
+}
+
+footer{
+    position: fixed;
+    bottom:0px;
+    left: 0px;
+    text-align: center;
+    width: 100%;
+    /* border-top: 10px; */
+    padding: 20px 0px 20px 0px;
+    border-style: solid;
+    border-width: 1px 0px 0px 0px;
+    border-color: black;
+}
