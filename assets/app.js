@@ -51,16 +51,27 @@ database.ref().on("child_added", function (snapshot) {
   console.log(snapshot.val().destination);
   console.log(snapshot.val().frequency);
 
-  console.log("First: " + snapshot.val().firstTrain);
-  var convertedTime = moment().format(snapshot.val().firstTrain, "HH:mm");
-  console.log("real: " + convertedTime);
 
-  // var convertTime = moment(), "hh:mm");
-  console.log(convertTime);
-  var timeDiff = (convertTime * "-1");
-  console.log("Not: " + timeDiff);
-  var nextArrival = (timeDiff * snapshot.val().frequency);
-  console.log("Sure: " + nextArrival);
+  // var time = snapshot.val().firstTrain
+  var convertedTime = moment(snapshot.val().firstTrain, "HH:mm")
+  var freqconvertedTime = moment(snapshot.val().frequency, "mm")
+  console.log(convertedTime.format('hh:mm a'));
+  var frequencyForNow = freqconvertedTime.format('mm')
+  var timeForNow = convertedTime.format('hh:mm a')
+  console.log(typeof frequencyForNow)
+
+  // var nextArrival = timeForNow + frequencyForNow
+  let nextArrival = convertedTime.add(frequencyForNow, 'minutes')
+  var timeForNow = nextArrival.format('hh:mm a')
+  console.log(timeForNow)
+
+  let away = moment().diff(nextArrival)
+  console.log(nextArrival)
+  let awayConvert = away.format('mm')
+  console.log(awayConvert)
+
+
+
 
 
 
@@ -68,7 +79,7 @@ database.ref().on("child_added", function (snapshot) {
     snapshot.val().train +
     " </td><td> " + snapshot.val().destination + 
     " </td><td> " + snapshot.val().frequency +
-    " </td><td> " + nextArrival +
+    " </td><td> " + timeForNow +
     " </td><td> " + "blank" +
     // " </td><td> " + minutesAway +
     " </td></tr>");
