@@ -53,22 +53,26 @@ database.ref().on("child_added", function (snapshot) {
 
 
   // var time = snapshot.val().firstTrain
-  var convertedTime = moment(snapshot.val().firstTrain, "HH:mm")
-  var freqconvertedTime = moment(snapshot.val().frequency, "mm")
-  console.log(convertedTime.format('hh:mm a'));
+  var convertedTime = moment().startOf(snapshot.val().firstTrain, "dddd, MMMM Do YYYY HH:mm")
+  var freqconvertedTime = moment().startOf(snapshot.val().frequency, "mm")
+  console.log("con" + convertedTime.format('dddd, MMMM Do YYYY hh:mm a'));
   var frequencyForNow = freqconvertedTime.format('mm')
-  var timeForNow = convertedTime.format('hh:mm a')
+  var timeForNow = convertedTime.format('dddd, MMMM Do YYYY hh:mm a')
   console.log(typeof frequencyForNow)
 
   // var nextArrival = timeForNow + frequencyForNow
   let nextArrival = convertedTime.add(frequencyForNow, 'minutes')
   var timeForNow = nextArrival.format('hh:mm a')
   console.log(timeForNow)
+  console.log("next" + nextArrival)
 
-  let away = moment().diff(nextArrival)
-  console.log(nextArrival)
-  let awayConvert = away.format('mm')
-  console.log(awayConvert)
+  let away = moment().startOf().diff(timeForNow, "h:mm")
+  console.log("awys" + away)
+  let awayConvert = away/"60"
+
+  // console.log(nextArrival)
+  // let awayConvert = away.format('mm:ss')
+  console.log("conver" + awayConvert)
 
 
 
